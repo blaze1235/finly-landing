@@ -1,0 +1,189 @@
+/* ============================================================
+   FINLY — COLORS & TYPE
+   ------------------------------------------------------------
+   Single source of truth for every visual token in the brand.
+   Import this file first; do not redefine these values elsewhere.
+   ============================================================ */
+
+/* DM Sans is loaded from Google Fonts (no self-hosted file shipped).
+   Syne is shipped as a variable font in /fonts/ — see @font-face below. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+@font-face {
+  font-family: 'Syne';
+  src: url('fonts/Syne-VariableFont_wght.ttf') format('truetype-variations'),
+       url('fonts/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── NEUTRALS ─────────────────────────────────────────────
+     Warm off-white app surface paired with near-black ink.
+     Never use pure #000 or #FFF — they read clinical against
+     the brand's warm grey. ───────────────────────────────── */
+  --bg:        #F4F5F7;   /* app background (warm light grey)        */
+  --surface:   #FFFFFF;   /* card / sheet surface                    */
+  --ink:       #111318;   /* primary text + primary button           */
+  --ink-dark:  #1C1C1E;   /* dark hero / wallet card surface         */
+  --ink-2:     #6B7280;   /* secondary text / muted label            */
+  --ink-3:     #B0B7C3;   /* tertiary text / placeholder             */
+  --border:    #ECEEF2;   /* hairline dividers + form borders        */
+  --hover:     #FAFAFA;   /* subtle row hover                        */
+
+  /* ── SEMANTIC PAIRS ───────────────────────────────────────
+     Always paired: solid + tint. Solid = text/fill,
+     tint = background of a chip, category icon, or row. ─── */
+  --green:     #16A34A;   --green-bg:  #F0FDF4;   --green-mid: #DCFCE7;
+  --red:       #DC2626;   --red-bg:    #FEF2F2;   --red-mid:   #FEE2E2;
+  --amber:     #D97706;   --amber-bg:  #FFFBEB;   --amber-mid: #FEF3C7;
+  --blue:      #2563EB;   --blue-bg:   #EFF6FF;   --blue-mid:  #DBEAFE;
+  --purple:    #7C3AED;   --purple-bg: #FAF5FF;   --purple-mid:#EDE9FE;
+
+  /* ── GAMIFICATION ─────────────────────────────────────────
+     Streak fire colour. Used on dark surfaces only. ──────── */
+  --flame:     #F59E0B;
+  --flame-dim: #D97706;
+
+  /* ── RADII ───────────────────────────────────────────────
+     Five-step scale. Inputs/buttons use md, cards lg,
+     bottom sheets / heroes xl. ─────────────────────────── */
+  --r-xs:  6px;
+  --r-sm:  10px;
+  --r-md:  14px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+  --r-pill: 999px;
+
+  /* ── SHADOWS ─────────────────────────────────────────────
+     Only three are sanctioned. Most cards rely on the
+     hairline border instead of an actual drop shadow. ─── */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* ── SPACING (4pt grid) ──────────────────────────────── */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+
+  /* ── MOTION ──────────────────────────────────────────── */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:   cubic-bezier(0.4, 0, 1, 1);
+  --dur-fast:  120ms;
+  --dur-med:   220ms;
+  --dur-slow:  400ms;
+
+  /* ── TYPE FAMILIES ────────────────────────────────────── */
+  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ============================================================
+   BASE TYPE
+   ------------------------------------------------------------
+   • Syne is the display face: short, dense, uppercase tracking
+     used for numerals, button labels, eyebrows and screen
+     headings. NEVER set Syne below 9px or above 40px.
+   • DM Sans handles every running paragraph, helper text,
+     transaction note, etc.  Always weight 400 for body copy.
+   ============================================================ */
+
+html, body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── SEMANTIC TYPE STYLES ───────────────────────────────── */
+
+.t-display {                       /* big-number balance / wallet */
+  font-family: var(--font-display);
+  font-size: 34px; font-weight: 700;
+  letter-spacing: -0.5px; line-height: 1.05;
+  color: var(--ink);
+}
+
+.t-h1 {                            /* screen-level heading */
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 800;
+  letter-spacing: -0.3px; line-height: 1.15;
+  color: var(--ink);
+}
+
+.t-h2 {                            /* card / section heading */
+  font-family: var(--font-display);
+  font-size: 17px; font-weight: 700;
+  letter-spacing: -0.2px; line-height: 1.2;
+  color: var(--ink);
+}
+
+.t-h3 {                            /* row title / list item */
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--ink);
+}
+
+.t-amount {                        /* numeric amount in tx row */
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.t-body {                          /* default running text */
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 400;
+  line-height: 1.5; color: var(--ink);
+}
+
+.t-body-strong {                   /* in-paragraph emphasis */
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 600;
+  color: var(--ink);
+}
+
+.t-meta {                          /* date · sub · helper */
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 500;
+  color: var(--ink-3);
+}
+
+.t-eyebrow {                       /* SECTION LABEL · UPPERCASE */
+  font-family: var(--font-display);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.t-button {                        /* uppercase CTA label */
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.t-mono {                          /* rare — IDs, codes */
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* ── COLOR HELPERS ───────────────────────────────────────── */
+.fg-green  { color: var(--green); }
+.fg-red    { color: var(--red); }
+.fg-amber  { color: var(--amber); }
+.fg-blue   { color: var(--blue); }
+.fg-purple { color: var(--purple); }
+.fg-muted  { color: var(--ink-2); }
+.fg-faint  { color: var(--ink-3); }
