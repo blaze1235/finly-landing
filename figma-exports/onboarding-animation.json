@@ -1,0 +1,1206 @@
+{
+  "meta": {
+    "name": "Finly — Onboarding & Core Usage Flow",
+    "version": "1.0.0",
+    "createdAt": "2025-05-28",
+    "description": "Complete animation specification for the Finly app onboarding and usage flow. Import via Figma plugin (e.g. 'JSON to Figma' or 'DesignSystems') or use as a hand-off spec.",
+    "frameSize": { "width": 375, "height": 812 },
+    "platform": "iOS / Android (Telegram Mini App)",
+    "totalFrames": 10,
+    "estimatedDuration": "28s"
+  },
+
+  "tokens": {
+    "colors": {
+      "bg":           "#F4F5F7",
+      "surface":      "#FFFFFF",
+      "ink":          "#111318",
+      "inkDark":      "#1C1C1E",
+      "ink2":         "#6B7280",
+      "ink3":         "#B0B7C3",
+      "border":       "#ECEEF2",
+      "green":        "#16A34A",
+      "greenBg":      "#F0FDF4",
+      "greenMid":     "#DCFCE7",
+      "red":          "#DC2626",
+      "redBg":        "#FEF2F2",
+      "redMid":       "#FEE2E2",
+      "amber":        "#D97706",
+      "amberBg":      "#FFFBEB",
+      "amberMid":     "#FEF3C7",
+      "blue":         "#2563EB",
+      "blueBg":       "#EFF6FF",
+      "blueMid":      "#DBEAFE",
+      "purple":       "#7C3AED",
+      "purpleBg":     "#FAF5FF",
+      "purpleMid":    "#EDE9FE",
+      "accent":       "#D97706",
+      "accentSoft":   "#FFFBEB",
+      "gradientWallet": ["#111318", "#1a1d24", "#0e1116"],
+      "gradientRewards": ["#1a0a3e", "#2d1069", "#1C1C1E"]
+    },
+    "typography": {
+      "fontDisplay": "Syne",
+      "fontBody": "DM Sans",
+      "scale": {
+        "display": { "size": 38, "weight": 800, "tracking": -1 },
+        "h1":      { "size": 22, "weight": 800, "tracking": -0.3 },
+        "h2":      { "size": 17, "weight": 700, "tracking": -0.2 },
+        "h3":      { "size": 13, "weight": 700 },
+        "amount":  { "size": 16, "weight": 800, "features": "tnum" },
+        "body":    { "size": 14, "weight": 400, "lineHeight": 1.5 },
+        "meta":    { "size": 11, "weight": 500 },
+        "eyebrow": { "size": 10, "weight": 700, "tracking": 1.8, "transform": "uppercase" },
+        "button":  { "size": 12, "weight": 700, "tracking": 1.5, "transform": "uppercase" }
+      }
+    },
+    "spacing": {
+      "s1": 4, "s2": 8, "s3": 12, "s4": 16,
+      "s5": 20, "s6": 24, "s8": 32, "s10": 40
+    },
+    "radii": {
+      "xs": 6, "sm": 10, "md": 14, "lg": 20, "xl": 28, "pill": 999
+    },
+    "shadows": {
+      "sm": "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
+      "md": "0 4px 16px rgba(0,0,0,0.08)",
+      "lg": "0 8px 32px rgba(0,0,0,0.12)"
+    },
+    "motion": {
+      "easeOut":  "cubic-bezier(0.16, 1, 0.3, 1)",
+      "easeIn":   "cubic-bezier(0.4, 0, 1, 1)",
+      "spring":   "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "fast":   120,
+      "medium": 280,
+      "slow":   420,
+      "xslow":  600
+    }
+  },
+
+  "components": {
+    "PhoneFrame": {
+      "width": 375, "height": 760,
+      "borderRadius": 52,
+      "border": { "width": 11, "color": "#0D0D0F" },
+      "shadow": "0 0 0 1px #2a2a2e, 0 60px 140px rgba(0,0,0,0.55)"
+    },
+    "StatusBar": {
+      "height": 44, "paddingH": 22,
+      "left": { "type": "TEXT", "value": "9:41", "size": 12, "weight": 700 },
+      "right": { "type": "GROUP", "children": ["SignalIcon", "BatteryIcon"] }
+    },
+    "NavBar": {
+      "height": 82,
+      "background": "#FFFFFF",
+      "borderTop": "1px solid #ECEEF2",
+      "items": [
+        { "id": "home",      "icon": "⊞", "label": "Главная" },
+        { "id": "add",       "icon": "＋", "label": "Запись" },
+        { "id": "analytics", "icon": "📊", "label": "Отчёты" },
+        { "id": "rewards",   "icon": "🏆", "label": "Прогресс" },
+        { "id": "profile",   "icon": "👤", "label": "Профиль" }
+      ],
+      "activeIndicator": {
+        "type": "RECTANGLE",
+        "width": 24, "height": 3,
+        "fill": "#111318",
+        "borderRadius": "0 0 3 3",
+        "position": "top-center"
+      }
+    },
+    "WalletCard": {
+      "background": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 140,
+        "stops": [
+          { "color": "#111318", "position": 0 },
+          { "color": "#1a1d24", "position": 0.45 },
+          { "color": "#0e1116", "position": 1 }
+        ]
+      },
+      "borderRadius": 24,
+      "padding": { "top": 20, "right": 20, "bottom": 18, "left": 20 },
+      "decorativeOrbs": [
+        { "radius": 85, "color": "rgba(245,158,11,0.14)", "position": "top-right" },
+        { "radius": 50, "color": "rgba(34,197,94,0.07)", "position": "bottom-left" }
+      ]
+    },
+    "TxCard": {
+      "background": "#FFFFFF",
+      "borderRadius": 18,
+      "padding": 14,
+      "shadow": "0 1px 4px rgba(0,0,0,0.05)",
+      "marginBottom": 7
+    },
+    "StreakBanner": {
+      "background": {
+        "type": "GRADIENT_LINEAR",
+        "angle": 135,
+        "stops": [
+          { "color": "#111318", "position": 0 },
+          { "color": "#1e2028", "position": 0.6 },
+          { "color": "#0f1115", "position": 1 }
+        ]
+      },
+      "borderRadius": 22,
+      "padding": 16
+    }
+  },
+
+  "frames": [
+    {
+      "id": "frame-01",
+      "name": "01 · Splash Screen",
+      "duration": 2000,
+      "description": "App cold start — white background, logo animates in with spring bounce",
+      "background": "#FFFFFF",
+      "layers": [
+        {
+          "id": "logo",
+          "type": "TEXT",
+          "name": "Finly. Logo",
+          "text": "Finly.",
+          "x": 148, "y": 358,
+          "width": 80, "height": 52,
+          "style": {
+            "fontFamily": "Syne",
+            "fontSize": 42,
+            "fontWeight": 800,
+            "letterSpacing": -2,
+            "color": "#111318",
+            "textAlign": "center"
+          },
+          "animation": {
+            "in": {
+              "type": "scale-fade",
+              "from": { "opacity": 0, "scale": 0.7 },
+              "to":   { "opacity": 1, "scale": 1 },
+              "duration": 500,
+              "easing": "spring",
+              "delay": 200
+            }
+          }
+        },
+        {
+          "id": "tagline",
+          "type": "TEXT",
+          "name": "Tagline",
+          "text": "Финансы под контролем",
+          "x": 75, "y": 420,
+          "width": 225, "height": 20,
+          "style": {
+            "fontFamily": "DM Sans",
+            "fontSize": 14,
+            "fontWeight": 400,
+            "color": "#6B7280",
+            "textAlign": "center"
+          },
+          "animation": {
+            "in": {
+              "type": "fade-up",
+              "from": { "opacity": 0, "y": 10 },
+              "to":   { "opacity": 1, "y": 0 },
+              "duration": 400,
+              "easing": "easeOut",
+              "delay": 600
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "frame-02",
+      "name": "02 · Open in Telegram",
+      "duration": 3000,
+      "description": "CTA screen — user prompted to open the bot in Telegram. Primary button pulses gently.",
+      "background": "#F4F5F7",
+      "layers": [
+        {
+          "id": "logo-small",
+          "type": "TEXT",
+          "name": "Finly. Logo",
+          "text": "Finly.",
+          "x": 20, "y": 60,
+          "width": 70, "height": 32,
+          "style": { "fontFamily": "Syne", "fontSize": 26, "fontWeight": 800, "letterSpacing": -1, "color": "#111318" }
+        },
+        {
+          "id": "hero-graphic",
+          "type": "RECTANGLE",
+          "name": "Illustration Placeholder",
+          "x": 40, "y": 130,
+          "width": 295, "height": 240,
+          "style": {
+            "borderRadius": 28,
+            "fill": {
+              "type": "GRADIENT_LINEAR",
+              "angle": 135,
+              "stops": [
+                { "color": "#EDE9FE", "position": 0 },
+                { "color": "#DBEAFE", "position": 1 }
+              ]
+            }
+          },
+          "annotation": "Replace with app illustration or phone mockup screenshot"
+        },
+        {
+          "id": "hero-emoji",
+          "type": "TEXT",
+          "name": "Hero Emoji",
+          "text": "💸",
+          "x": 155, "y": 215,
+          "width": 65, "height": 65,
+          "style": { "fontSize": 64 }
+        },
+        {
+          "id": "headline",
+          "type": "TEXT",
+          "name": "Headline",
+          "text": "Ваши деньги —\nпод контролем",
+          "x": 24, "y": 396,
+          "width": 327, "height": 88,
+          "style": {
+            "fontFamily": "Syne",
+            "fontSize": 36,
+            "fontWeight": 800,
+            "letterSpacing": -1,
+            "lineHeight": 1.15,
+            "color": "#111318"
+          }
+        },
+        {
+          "id": "subtext",
+          "type": "TEXT",
+          "name": "Sub",
+          "text": "Записывайте операции за 5 секунд прямо в Telegram. Бесплатно, без регистрации.",
+          "x": 24, "y": 496,
+          "width": 327, "height": 52,
+          "style": {
+            "fontFamily": "DM Sans",
+            "fontSize": 14,
+            "fontWeight": 400,
+            "lineHeight": 1.5,
+            "color": "#6B7280"
+          }
+        },
+        {
+          "id": "cta-button",
+          "type": "FRAME",
+          "name": "CTA — Открыть в Telegram",
+          "x": 24, "y": 570,
+          "width": 327, "height": 58,
+          "style": {
+            "borderRadius": 16,
+            "fill": "#111318"
+          },
+          "children": [
+            {
+              "type": "TEXT",
+              "text": "Открыть в Telegram",
+              "style": {
+                "fontFamily": "Syne",
+                "fontSize": 13, "fontWeight": 700,
+                "letterSpacing": 1.5,
+                "color": "#FFFFFF",
+                "textTransform": "uppercase"
+              }
+            }
+          ],
+          "animation": {
+            "idle": {
+              "type": "pulse-scale",
+              "keyframes": [
+                { "scale": 1,    "duration": 2000 },
+                { "scale": 1.02, "duration": 400 },
+                { "scale": 1,    "duration": 400 }
+              ],
+              "repeat": "infinite",
+              "easing": "easeInOut"
+            }
+          }
+        },
+        {
+          "id": "trust-badge",
+          "type": "TEXT",
+          "name": "Trust Note",
+          "text": "✓ Без пароля — только ваш Telegram аккаунт",
+          "x": 24, "y": 644,
+          "width": 327, "height": 18,
+          "style": {
+            "fontFamily": "DM Sans",
+            "fontSize": 12,
+            "fontWeight": 500,
+            "color": "#B0B7C3",
+            "textAlign": "center"
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "frame-03",
+      "name": "03 · Telegram Auth",
+      "duration": 2000,
+      "description": "Telegram OS-level auth dialog — auto-filled from Telegram profile. User taps 'Открыть'.",
+      "background": "rgba(0,0,0,0.5)",
+      "overlay": true,
+      "layers": [
+        {
+          "id": "sheet",
+          "type": "FRAME",
+          "name": "Auth Sheet",
+          "x": 0, "y": 480,
+          "width": 375, "height": 332,
+          "style": {
+            "borderRadius": "28px 28px 0 0",
+            "fill": "#FFFFFF"
+          },
+          "children": [
+            {
+              "id": "handle",
+              "type": "RECTANGLE",
+              "name": "Drag Handle",
+              "x": 163, "y": 12,
+              "width": 48, "height": 4,
+              "style": { "borderRadius": 2, "fill": "#ECEEF2" }
+            },
+            {
+              "id": "tg-logo",
+              "type": "TEXT",
+              "name": "Telegram Emoji",
+              "text": "✈️",
+              "x": 158, "y": 38,
+              "width": 58, "height": 58,
+              "style": { "fontSize": 52, "textAlign": "center" }
+            },
+            {
+              "id": "title",
+              "type": "TEXT",
+              "name": "Title",
+              "text": "Finly. хочет получить\nдоступ к Telegram",
+              "x": 24, "y": 108,
+              "width": 327, "height": 52,
+              "style": {
+                "fontFamily": "Syne", "fontSize": 20, "fontWeight": 700,
+                "lineHeight": 1.3, "color": "#111318", "textAlign": "center"
+              }
+            },
+            {
+              "id": "permission-rows",
+              "type": "GROUP",
+              "name": "Permission List",
+              "children": [
+                { "type": "TEXT", "text": "✓  Ваше имя и фото профиля", "y": 172 },
+                { "type": "TEXT", "text": "✓  Аккаунт Telegram (без пароля)", "y": 196 }
+              ],
+              "style": {
+                "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": 500,
+                "color": "#6B7280", "x": 24, "width": 327
+              }
+            },
+            {
+              "id": "confirm-btn",
+              "type": "FRAME",
+              "name": "Confirm Button",
+              "x": 24, "y": 240,
+              "width": 327, "height": 52,
+              "style": { "borderRadius": 14, "fill": "#2563EB" },
+              "children": [
+                {
+                  "type": "TEXT",
+                  "text": "Открыть",
+                  "style": { "fontFamily": "Syne", "fontSize": 16, "fontWeight": 700, "color": "#FFFFFF" }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "animation": {
+        "in": {
+          "type": "slide-up",
+          "from": { "y": 812 },
+          "to":   { "y": 480 },
+          "duration": 380,
+          "easing": "easeOut"
+        }
+      }
+    },
+
+    {
+      "id": "frame-04",
+      "name": "04 · Welcome — Auth Success",
+      "duration": 2500,
+      "description": "Post-auth welcome screen. Name auto-filled. Confetti/XP particles appear briefly.",
+      "background": "#FFFFFF",
+      "layers": [
+        {
+          "id": "confetti",
+          "type": "EFFECT",
+          "name": "Confetti Burst",
+          "effect": "particle-explosion",
+          "particles": [
+            { "emoji": "✨", "count": 8 },
+            { "emoji": "🎉", "count": 4 },
+            { "emoji": "⭐", "count": 6 }
+          ],
+          "origin": { "x": 187, "y": 300 },
+          "duration": 1200,
+          "spread": 200
+        },
+        {
+          "id": "avatar",
+          "type": "FRAME",
+          "name": "Avatar Circle",
+          "x": 143, "y": 200,
+          "width": 88, "height": 88,
+          "style": {
+            "borderRadius": 28,
+            "fill": { "type": "GRADIENT_LINEAR", "angle": 135, "stops": [
+              { "color": "#1f2937", "position": 0 },
+              { "color": "#374151", "position": 1 }
+            ]},
+            "border": "3px solid #FEF3C7"
+          },
+          "children": [
+            {
+              "type": "TEXT",
+              "text": "А",
+              "style": { "fontFamily": "Syne", "fontSize": 36, "fontWeight": 800, "color": "#FFFFFF", "textAlign": "center" }
+            }
+          ],
+          "animation": {
+            "in": {
+              "type": "scale-bounce",
+              "from": { "scale": 0 },
+              "to":   { "scale": 1 },
+              "duration": 500,
+              "easing": "spring",
+              "delay": 200
+            }
+          }
+        },
+        {
+          "id": "welcome-text",
+          "type": "TEXT",
+          "name": "Welcome Message",
+          "text": "Добро пожаловать,\nАлишер! 🎉",
+          "x": 24, "y": 316,
+          "width": 327, "height": 72,
+          "style": {
+            "fontFamily": "Syne", "fontSize": 28, "fontWeight": 800,
+            "letterSpacing": -0.5, "lineHeight": 1.2,
+            "color": "#111318", "textAlign": "center"
+          },
+          "animation": {
+            "in": {
+              "type": "fade-up",
+              "from": { "opacity": 0, "y": 14 },
+              "to":   { "opacity": 1, "y": 0 },
+              "duration": 400, "easing": "easeOut", "delay": 500
+            }
+          }
+        },
+        {
+          "id": "xp-badge",
+          "type": "FRAME",
+          "name": "+50 XP Badge",
+          "x": 144, "y": 404,
+          "width": 87, "height": 36,
+          "style": { "borderRadius": 18, "fill": "#FFFBEB", "border": "1px solid #FEF3C7" },
+          "children": [
+            {
+              "type": "TEXT",
+              "text": "+50 XP 🔥",
+              "style": { "fontFamily": "Syne", "fontSize": 13, "fontWeight": 800, "color": "#D97706" }
+            }
+          ],
+          "animation": {
+            "in": {
+              "type": "pop",
+              "from": { "scale": 0.5, "opacity": 0 },
+              "to":   { "scale": 1,   "opacity": 1 },
+              "duration": 400, "easing": "spring", "delay": 700
+            }
+          }
+        },
+        {
+          "id": "continue-btn",
+          "type": "FRAME",
+          "name": "Continue Button",
+          "x": 24, "y": 700,
+          "width": 327, "height": 56,
+          "style": { "borderRadius": 16, "fill": "#111318" },
+          "children": [
+            {
+              "type": "TEXT",
+              "text": "Начать",
+              "style": { "fontFamily": "Syne", "fontSize": 13, "fontWeight": 700, "color": "#FFFFFF", "letterSpacing": 1.5, "textTransform": "uppercase" }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "frame-05",
+      "name": "05 · Home Dashboard",
+      "duration": 3000,
+      "description": "Main home screen — wallet card animates in first, then cards cascade down.",
+      "background": "#F4F5F7",
+      "screenRef": "HomeScreen",
+      "layers": [
+        {
+          "id": "status-bar",
+          "type": "COMPONENT",
+          "ref": "StatusBar",
+          "x": 0, "y": 0, "width": 375, "height": 44
+        },
+        {
+          "id": "greeting",
+          "type": "GROUP",
+          "name": "Greeting Header",
+          "x": 0, "y": 44, "width": 375, "height": 56,
+          "children": [
+            { "type": "TEXT", "text": "Вторник, 13 мая", "style": { "fontSize": 11, "color": "#B0B7C3" }, "x": 20, "y": 48 },
+            { "type": "TEXT", "text": "Привет, Алишер 👋", "style": { "fontFamily": "Syne", "fontSize": 20, "fontWeight": 800, "color": "#111318" }, "x": 20, "y": 64 },
+            {
+              "id": "avatar-chip",
+              "type": "RECTANGLE",
+              "x": 313, "y": 50,
+              "width": 42, "height": 42,
+              "style": { "borderRadius": 14, "fill": { "type": "GRADIENT_LINEAR", "angle": 135, "stops": [{"color": "#111318"},{"color": "#2a2a30"}] }}
+            }
+          ]
+        },
+        {
+          "id": "wallet-card",
+          "type": "COMPONENT",
+          "ref": "WalletCard",
+          "x": 16, "y": 108,
+          "width": 343, "height": 168,
+          "props": {
+            "balance": 2790000,
+            "income": 3450000,
+            "expense": 660000,
+            "spentPct": 19
+          },
+          "annotation": "Dark gradient card. Balance = 2 790 000 сум. Income bar green (↑ 3 450 000), expense bar red (↓ 660 000), spent 19% bar.",
+          "animation": {
+            "in": {
+              "type": "slide-up-fade",
+              "from": { "opacity": 0, "y": 30 },
+              "to":   { "opacity": 1, "y": 0 },
+              "duration": 500, "easing": "easeOut", "delay": 100
+            }
+          }
+        },
+        {
+          "id": "quick-actions",
+          "type": "GROUP",
+          "name": "Quick Actions Grid",
+          "x": 16, "y": 288, "width": 343, "height": 84,
+          "layout": { "type": "GRID", "columns": 4, "gap": 8 },
+          "children": [
+            { "type": "CARD", "icon": "➕", "label": "Запись",   "tone": "green" },
+            { "type": "CARD", "icon": "📊", "label": "Отчёты",   "tone": "blue" },
+            { "type": "CARD", "icon": "🏆", "label": "Прогресс", "tone": "purple" },
+            { "type": "CARD", "icon": "👤", "label": "Профиль",  "tone": "amber" }
+          ],
+          "animation": {
+            "in": {
+              "type": "stagger-fade-up",
+              "staggerDelay": 60,
+              "duration": 350, "easing": "easeOut", "delay": 300
+            }
+          }
+        },
+        {
+          "id": "streak-banner",
+          "type": "COMPONENT",
+          "ref": "StreakBanner",
+          "x": 16, "y": 380, "width": 343, "height": 96,
+          "props": { "streak": 12 },
+          "animation": {
+            "in": { "type": "fade-up", "from": {"opacity": 0, "y": 16}, "to": {"opacity": 1, "y": 0}, "duration": 380, "easing": "easeOut", "delay": 420 }
+          }
+        },
+        {
+          "id": "insight-card",
+          "type": "FRAME",
+          "x": 16, "y": 484, "width": 343, "height": 60,
+          "style": { "borderRadius": 18, "fill": "#EFF6FF", "border": "1px solid #BFDBFE" },
+          "children": [
+            { "type": "TEXT", "text": "💡", "x": 14, "y": 20, "style": { "fontSize": 18 } },
+            { "type": "TEXT", "text": "Еда дорожает", "x": 42, "y": 18, "style": { "fontFamily": "Syne", "fontSize": 12, "fontWeight": 700, "color": "#1E40AF" } },
+            { "type": "TEXT", "text": "Эта неделя на 23% больше среднего", "x": 42, "y": 34, "style": { "fontSize": 11, "color": "#3B82F6", "fontWeight": 500 } }
+          ]
+        },
+        {
+          "id": "tx-list",
+          "type": "GROUP",
+          "name": "Recent Transactions",
+          "x": 16, "y": 556, "width": 343,
+          "children": [
+            { "type": "TEXT", "text": "Последнее", "style": { "fontFamily": "Syne", "fontSize": 13, "fontWeight": 700 }, "x": 0, "y": 0 },
+            { "type": "COMPONENT", "ref": "TxCard", "props": { "icon": "🛒", "cat": "Продукты", "merchant": "Korzinka", "amount": -85000, "date": "Сегодня · 14:32" }, "y": 24 },
+            { "type": "COMPONENT", "ref": "TxCard", "props": { "icon": "💼", "cat": "Зарплата", "merchant": "Май", "amount": 3450000, "date": "Вчера · 09:00", "income": true }, "y": 95 }
+          ],
+          "animation": {
+            "in": { "type": "stagger-fade-up", "staggerDelay": 80, "duration": 380, "easing": "easeOut", "delay": 550 }
+          }
+        },
+        {
+          "id": "navbar",
+          "type": "COMPONENT",
+          "ref": "NavBar",
+          "x": 0, "y": 730, "width": 375, "height": 82,
+          "props": { "activeTab": "home" }
+        }
+      ]
+    },
+
+    {
+      "id": "frame-06",
+      "name": "06 · Add Transaction",
+      "duration": 4000,
+      "description": "User taps ➕. Add screen slides in. User types amount, selects '🛒 Продукты', taps Save.",
+      "background": "#F4F5F7",
+      "screenRef": "AddScreen",
+      "layers": [
+        {
+          "id": "status-bar", "type": "COMPONENT", "ref": "StatusBar", "x": 0, "y": 0, "width": 375, "height": 44
+        },
+        {
+          "id": "page-header",
+          "type": "GROUP", "name": "Page Header",
+          "x": 0, "y": 44, "width": 375, "height": 56,
+          "children": [
+            { "type": "RECTANGLE", "name": "Back Button", "x": 20, "y": 52, "width": 36, "height": 36, "style": { "borderRadius": 11, "fill": "#ECEEF2" } },
+            { "type": "TEXT", "text": "‹", "x": 28, "y": 56, "style": { "fontSize": 20, "color": "#111318" } },
+            { "type": "TEXT", "text": "Новая запись", "x": 66, "y": 57, "style": { "fontFamily": "Syne", "fontSize": 19, "fontWeight": 800, "color": "#111318" } }
+          ]
+        },
+        {
+          "id": "amount-card",
+          "type": "FRAME",
+          "name": "Amount Card",
+          "x": 16, "y": 110, "width": 343, "height": 180,
+          "style": { "borderRadius": 22, "fill": "#FFFFFF", "shadow": "0 1px 4px rgba(0,0,0,0.05)" },
+          "children": [
+            {
+              "id": "type-toggle",
+              "type": "FRAME",
+              "name": "Expense/Income Toggle",
+              "x": 16, "y": 16, "width": 180, "height": 36,
+              "style": { "borderRadius": 14, "fill": "#F4F5F7" },
+              "children": [
+                { "type": "RECTANGLE", "name": "Active Pill", "x": 4, "y": 4, "width": 84, "height": 28, "style": { "borderRadius": 11, "fill": "#DC2626" } },
+                { "type": "TEXT", "text": "↓ Расход", "x": 12, "y": 10, "style": { "fontFamily": "Syne", "fontSize": 12, "fontWeight": 700, "color": "#FFFFFF" } },
+                { "type": "TEXT", "text": "↑ Доход", "x": 104, "y": 10, "style": { "fontFamily": "Syne", "fontSize": 12, "fontWeight": 700, "color": "#6B7280" } }
+              ]
+            },
+            {
+              "id": "amount-display",
+              "type": "TEXT",
+              "name": "Amount Number",
+              "text": "85 000",
+              "x": 20, "y": 68,
+              "width": 303, "height": 60,
+              "style": {
+                "fontFamily": "Syne", "fontSize": 42, "fontWeight": 800,
+                "color": "#DC2626", "letterSpacing": -1,
+                "fontVariantNumeric": "tabular-nums", "textAlign": "center"
+              },
+              "animation": {
+                "in": { "type": "count-up", "from": 0, "to": 85000, "duration": 800, "easing": "easeOut" }
+              }
+            },
+            {
+              "id": "currency-label",
+              "type": "TEXT",
+              "text": "сум",
+              "x": 20, "y": 134,
+              "style": { "fontFamily": "Syne", "fontSize": 10, "fontWeight": 700, "color": "#B0B7C3", "letterSpacing": 2, "textTransform": "uppercase", "textAlign": "center", "width": 303 }
+            }
+          ]
+        },
+        {
+          "id": "category-label",
+          "type": "TEXT", "text": "Категория",
+          "x": 16, "y": 304, "style": { "fontFamily": "Syne", "fontSize": 10, "fontWeight": 700, "color": "#B0B7C3", "letterSpacing": 1.5, "textTransform": "uppercase" }
+        },
+        {
+          "id": "category-grid",
+          "type": "GROUP", "name": "Category Grid",
+          "x": 16, "y": 320, "width": 343, "height": 200,
+          "layout": { "type": "GRID", "columns": 3, "gap": 8 },
+          "annotation": "3x3 grid for expense categories. 🛒 Продукты is selected (red border, red bg tint).",
+          "children": [
+            { "type": "CARD", "icon": "🛒", "label": "Продукты", "selected": true,  "selectedColor": "#DC2626" },
+            { "type": "CARD", "icon": "🏠", "label": "Жильё",    "selected": false },
+            { "type": "CARD", "icon": "🚌", "label": "Транспорт","selected": false },
+            { "type": "CARD", "icon": "🍕", "label": "Кафе",     "selected": false },
+            { "type": "CARD", "icon": "💊", "label": "Здоровье", "selected": false },
+            { "type": "CARD", "icon": "🎬", "label": "Развлечения","selected": false },
+            { "type": "CARD", "icon": "👕", "label": "Одежда",   "selected": false },
+            { "type": "CARD", "icon": "📚", "label": "Учёба",    "selected": false },
+            { "type": "CARD", "icon": "•••","label": "Прочее",   "selected": false }
+          ]
+        },
+        {
+          "id": "save-btn",
+          "type": "FRAME", "name": "Save Button",
+          "x": 16, "y": 696, "width": 343, "height": 52,
+          "style": {
+            "borderRadius": 16,
+            "fill": { "type": "GRADIENT_LINEAR", "angle": 135, "stops": [{"color": "#DC2626"},{"color": "#DC2626cc"}] },
+            "shadow": "0 8px 24px rgba(220,38,38,0.35)"
+          },
+          "children": [
+            { "type": "TEXT", "text": "Сохранить", "style": { "fontFamily": "Syne", "fontSize": 12, "fontWeight": 800, "color": "#FFFFFF", "letterSpacing": 2, "textTransform": "uppercase" } },
+            { "type": "FRAME", "name": "XP Badge", "style": { "borderRadius": 8, "fill": "rgba(255,255,255,0.2)", "padding": "2px 8px" }, "children": [{ "type": "TEXT", "text": "+10 XP", "style": { "fontFamily": "Syne", "fontSize": 11, "fontWeight": 700, "color": "#FFFFFF" } }] }
+          ]
+        },
+        { "id": "navbar", "type": "COMPONENT", "ref": "NavBar", "x": 0, "y": 730, "width": 375, "height": 82, "props": { "activeTab": "add" } }
+      ]
+    },
+
+    {
+      "id": "frame-07",
+      "name": "07 · Transaction Saved — XP Toast",
+      "duration": 2000,
+      "description": "After Save, brief toast notification appears at top: category, amount, +10 XP. Then transitions back to Home.",
+      "background": "#F4F5F7",
+      "baseFrame": "frame-05",
+      "overlays": [
+        {
+          "id": "toast",
+          "type": "FRAME",
+          "name": "Toast Notification",
+          "x": 12, "y": 14,
+          "width": 351, "height": 60,
+          "style": {
+            "borderRadius": 16, "fill": "#1C1C1E",
+            "shadow": "0 8px 32px rgba(0,0,0,0.4)"
+          },
+          "children": [
+            { "type": "TEXT", "text": "🧾", "x": 14, "y": 18, "style": { "fontSize": 22 } },
+            { "type": "TEXT", "text": "Продукты", "x": 50, "y": 16, "style": { "fontFamily": "Syne", "fontSize": 13, "fontWeight": 700, "color": "#FFFFFF" } },
+            { "type": "TEXT", "text": "−85 000 сум", "x": 50, "y": 33, "style": { "fontSize": 10, "color": "#888888" } },
+            {
+              "id": "xp-chip",
+              "type": "FRAME", "x": 292, "y": 18,
+              "style": { "borderRadius": 10, "fill": "#FFFBEB", "padding": "4px 10px" },
+              "children": [{ "type": "TEXT", "text": "+10 XP", "style": { "fontFamily": "Syne", "fontSize": 11, "fontWeight": 800, "color": "#D97706" } }]
+            }
+          ],
+          "animation": {
+            "in":  { "type": "slide-down", "from": { "y": -80 }, "to": { "y": 14 }, "duration": 280, "easing": "easeOut" },
+            "out": { "type": "fade-up",    "from": { "opacity": 1 }, "to": { "opacity": 0, "y": -20 }, "duration": 250, "easing": "easeIn", "delay": 1500 }
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "frame-08",
+      "name": "08 · Analytics Screen",
+      "duration": 3000,
+      "description": "Reports tab. DonutChart segments animate in one by one. Category bars grow from left.",
+      "background": "#F4F5F7",
+      "screenRef": "AnalyticsScreen",
+      "layers": [
+        { "id": "status-bar", "type": "COMPONENT", "ref": "StatusBar", "x": 0, "y": 0, "width": 375, "height": 44 },
+        {
+          "id": "header", "type": "GROUP",
+          "x": 0, "y": 44, "width": 375, "height": 56,
+          "children": [
+            { "type": "TEXT", "text": "Отчёты", "x": 20, "y": 55, "style": { "fontFamily": "Syne", "fontSize": 19, "fontWeight": 800, "color": "#111318" } },
+            { "type": "FRAME", "name": "Month Chip", "x": 305, "y": 52, "width": 54, "height": 30,
+              "style": { "borderRadius": 10, "fill": "#F4F5F7" },
+              "children": [{ "type": "TEXT", "text": "Май ▾", "style": { "fontFamily": "Syne", "fontSize": 11, "fontWeight": 700, "color": "#6B7280" } }] }
+          ]
+        },
+        {
+          "id": "kpi-strip", "type": "COMPONENT", "ref": "KpiStrip",
+          "x": 16, "y": 108, "width": 343, "height": 58,
+          "props": {
+            "items": [
+              { "val": "+3 450 000", "lab": "Доход",    "tone": "green" },
+              { "val": "−660 000",  "lab": "Расход",   "tone": "red" },
+              { "val": "19%",       "lab": "Потрачено","tone": "amber" }
+            ]
+          }
+        },
+        {
+          "id": "chart-card",
+          "type": "FRAME",
+          "name": "Donut Chart + Categories",
+          "x": 16, "y": 174, "width": 343, "height": 190,
+          "style": { "borderRadius": 22, "fill": "#FFFFFF", "shadow": "0 1px 4px rgba(0,0,0,0.05)" },
+          "layout": { "type": "FLEX", "direction": "row", "gap": 14, "alignItems": "center", "padding": 16 },
+          "children": [
+            {
+              "id": "donut-chart",
+              "type": "SVG_COMPONENT",
+              "name": "Donut Chart",
+              "width": 130, "height": 130,
+              "annotation": "SVG circle chart. r=46, strokeWidth=13. Segments: blue (Жильё 54%), amber (Продукты 26%), green (Транспорт 11%), purple (Кафе 9%). Each segment animates in with stroke-dasharray from 0 to final value.",
+              "segments": [
+                { "category": "Жильё",      "pct": 54, "color": "#2563EB" },
+                { "category": "Продукты",   "pct": 26, "color": "#D97706" },
+                { "category": "Транспорт",  "pct": 11, "color": "#16A34A" },
+                { "category": "Кафе",       "pct":  9, "color": "#7C3AED" }
+              ],
+              "animation": {
+                "in": { "type": "stroke-grow", "staggerDelay": 150, "duration": 600, "easing": "easeOut" }
+              }
+            },
+            {
+              "id": "category-list",
+              "type": "GROUP",
+              "name": "Category Rows",
+              "width": 183,
+              "children": [
+                { "color": "#2563EB", "name": "Жильё",     "pct": 54, "bar": "animate-width" },
+                { "color": "#D97706", "name": "Продукты",  "pct": 26, "bar": "animate-width" },
+                { "color": "#16A34A", "name": "Транспорт", "pct": 11, "bar": "animate-width" },
+                { "color": "#7C3AED", "name": "Кафе",      "pct":  9, "bar": "animate-width" }
+              ],
+              "annotation": "For each row: 8px colored dot, category name, pct number. Below: 4px height progress bar that grows from 0% to pct% on entry."
+            }
+          ]
+        },
+        {
+          "id": "filter-pills",
+          "type": "GROUP", "name": "Filter Pills",
+          "x": 16, "y": 372, "width": 343, "height": 36,
+          "layout": { "type": "FLEX", "direction": "row", "gap": 7 },
+          "children": [
+            { "type": "COMPONENT", "ref": "Pill", "props": { "label": "Все",    "active": true } },
+            { "type": "COMPONENT", "ref": "Pill", "props": { "label": "Доход",  "active": false } },
+            { "type": "COMPONENT", "ref": "Pill", "props": { "label": "Расход", "active": false } },
+            { "type": "COMPONENT", "ref": "Pill", "props": { "label": "Повтор", "active": false } }
+          ]
+        },
+        { "id": "navbar", "type": "COMPONENT", "ref": "NavBar", "x": 0, "y": 730, "width": 375, "height": 82, "props": { "activeTab": "analytics" } }
+      ]
+    },
+
+    {
+      "id": "frame-09",
+      "name": "09 · Rewards / Streak",
+      "duration": 3000,
+      "description": "Rewards screen. Dark hero with purple gradient. XP bar fills up. Streak badge pulses. Fire emoji bounces.",
+      "background": "#F4F5F7",
+      "screenRef": "RewardsScreen",
+      "layers": [
+        { "id": "status-bar", "type": "COMPONENT", "ref": "StatusBar", "x": 0, "y": 0, "width": 375, "height": 44, "props": { "dark": true } },
+        {
+          "id": "hero",
+          "type": "FRAME",
+          "name": "Rewards Hero",
+          "x": 0, "y": 44, "width": 375, "height": 220,
+          "style": {
+            "fill": { "type": "GRADIENT_LINEAR", "angle": 150, "stops": [
+              { "color": "#1a0a3e", "position": 0 },
+              { "color": "#2d1069", "position": 0.4 },
+              { "color": "#1C1C1E", "position": 1 }
+            ]},
+            "overflow": "hidden"
+          },
+          "children": [
+            { "id": "orb1", "type": "ELLIPSE", "x": 185, "y": -60, "width": 220, "height": 220, "style": { "fill": "radial-gradient rgba(124,58,237,0.3)" }, "animation": { "idle": { "type": "breathe", "scaleRange": [1, 1.15], "duration": 4000 } } },
+            { "id": "level-label", "type": "TEXT", "text": "Уровень 4", "x": 20, "y": 16, "style": { "fontFamily": "Syne", "fontSize": 10, "fontWeight": 700, "color": "rgba(255,255,255,0.35)", "letterSpacing": 2, "textTransform": "uppercase" } },
+            { "id": "xp-display", "type": "TEXT", "text": "870 XP", "x": 20, "y": 36, "style": { "fontFamily": "Syne", "fontSize": 40, "fontWeight": 800, "color": "#FFFFFF", "letterSpacing": -1 } },
+            {
+              "id": "xp-bar-container",
+              "type": "FRAME", "x": 20, "y": 98, "width": 335, "height": 50,
+              "style": { "borderRadius": 14, "fill": "rgba(255,255,255,0.06)", "border": "1px solid rgba(255,255,255,0.08)" },
+              "children": [
+                { "type": "TEXT", "text": "До LVL 5", "x": 12, "y": 10, "style": { "fontFamily": "Syne", "fontSize": 9, "fontWeight": 700, "color": "rgba(255,255,255,0.35)", "letterSpacing": 1 } },
+                { "type": "TEXT", "text": "870 / 1000 XP", "x": 200, "y": 10, "style": { "fontSize": 9, "fontWeight": 700, "color": "rgba(255,255,255,0.35)", "width": 123, "textAlign": "right" } },
+                {
+                  "id": "xp-bar-track",
+                  "type": "RECTANGLE", "x": 12, "y": 28, "width": 311, "height": 6,
+                  "style": { "borderRadius": 4, "fill": "rgba(255,255,255,0.08)" },
+                  "children": [
+                    {
+                      "id": "xp-bar-fill",
+                      "type": "RECTANGLE", "x": 0, "y": 0, "width": 270, "height": 6,
+                      "style": { "borderRadius": 4, "fill": { "type": "GRADIENT_LINEAR", "angle": 90, "stops": [{"color": "#D97706"},{"color": "#F59E0B"},{"color": "#FCD34D"}] } },
+                      "animation": { "in": { "type": "width-grow", "from": 0, "to": 270, "duration": 800, "easing": "easeOut", "delay": 400 } }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "section-tabs",
+              "type": "GROUP", "name": "Section Tabs",
+              "x": 20, "y": 158, "width": 335, "height": 40,
+              "layout": { "type": "FLEX", "direction": "row", "gap": 4 },
+              "children": [
+                { "type": "FRAME", "label": "История", "active": true,  "style": { "borderRadius": "12px 12px 0 0", "fill": "#F4F5F7" } },
+                { "type": "FRAME", "label": "Награды", "active": false, "style": { "borderRadius": "12px 12px 0 0", "fill": "rgba(255,255,255,0.06)" } },
+                { "type": "FRAME", "label": "Лидеры",  "active": false, "style": { "borderRadius": "12px 12px 0 0", "fill": "rgba(255,255,255,0.06)" } }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "streak-banner",
+          "type": "COMPONENT", "ref": "StreakBanner",
+          "x": 16, "y": 278, "width": 343,
+          "props": { "streak": 12 },
+          "annotation": "🔥 emoji bounces (translateY -6px) every 3s. Dot cells animate in left to right on entry.",
+          "animation": {
+            "in": { "type": "fade-up", "delay": 200 },
+            "idle": {
+              "target": "#fire-emoji",
+              "type": "bounce",
+              "keyframes": [{ "y": 0 }, { "y": -6 }, { "y": 0 }],
+              "duration": 600,
+              "repeatDelay": 3000
+            }
+          }
+        },
+        {
+          "id": "xp-history-list",
+          "type": "GROUP", "name": "XP History",
+          "x": 16, "y": 390, "width": 343,
+          "children": [
+            { "ref": "XPHistoryRow", "icon": "🔥", "label": "Серия сохранена",  "sub": "14:32 · ×12",                  "pts": 20 },
+            { "ref": "XPHistoryRow", "icon": "➕", "label": "Новая операция",    "sub": "14:29 · Продукты · 85 000",    "pts": 10 },
+            { "ref": "XPHistoryRow", "icon": "📊", "label": "Аналитика открыта", "sub": "13:10",                         "pts": 5  }
+          ],
+          "animation": { "in": { "type": "stagger-fade-up", "staggerDelay": 80, "duration": 350, "delay": 350 } }
+        },
+        { "id": "navbar", "type": "COMPONENT", "ref": "NavBar", "x": 0, "y": 730, "width": 375, "height": 82, "props": { "activeTab": "rewards" } }
+      ]
+    },
+
+    {
+      "id": "frame-10",
+      "name": "10 · Profile Screen",
+      "duration": 2000,
+      "description": "Profile with dark hero. Stats strip shows streak, XP, level. Settings list slides in.",
+      "background": "#F4F5F7",
+      "screenRef": "ProfileScreen",
+      "layers": [
+        { "id": "status-bar", "type": "COMPONENT", "ref": "StatusBar", "x": 0, "y": 0, "width": 375, "height": 44, "props": { "dark": true } },
+        {
+          "id": "profile-hero",
+          "type": "FRAME",
+          "name": "Profile Hero",
+          "x": 0, "y": 44, "width": 375, "height": 180,
+          "style": {
+            "fill": { "type": "GRADIENT_LINEAR", "angle": 160, "stops": [
+              { "color": "#111318", "position": 0 },
+              { "color": "#1a1d24", "position": 0.7 },
+              { "color": "#0e1116", "position": 1 }
+            ]},
+            "overflow": "hidden"
+          },
+          "children": [
+            { "id": "flame-orb", "type": "ELLIPSE", "x": 235, "y": -40, "width": 160, "height": 160, "style": { "fill": "radial-gradient rgba(245,158,11,0.1)" } },
+            {
+              "id": "avatar-area",
+              "type": "GROUP", "x": 20, "y": 16, "width": 250,
+              "children": [
+                {
+                  "id": "avatar",
+                  "type": "FRAME", "width": 60, "height": 60,
+                  "style": { "borderRadius": 20, "fill": "linear-gradient #1f2937→#374151", "border": "2px solid rgba(255,255,255,0.08)" },
+                  "children": [{ "type": "TEXT", "text": "А", "style": { "fontFamily": "Syne", "fontSize": 24, "fontWeight": 800, "color": "#FFFFFF" } }]
+                },
+                {
+                  "id": "lvl-badge",
+                  "type": "FRAME",
+                  "style": { "borderRadius": 6, "fill": "linear-gradient #D97706→#F59E0B", "padding": "3px 7px", "position": "absolute", "bottom": -8, "centerH": true },
+                  "children": [{ "type": "TEXT", "text": "LVL 4", "style": { "fontFamily": "Syne", "fontSize": 8, "fontWeight": 900, "color": "#1C1C1E" } }]
+                },
+                { "id": "name",     "type": "TEXT", "text": "Алишер",    "x": 80, "y": 0,  "style": { "fontFamily": "Syne", "fontSize": 21, "fontWeight": 800, "color": "#FFFFFF" } },
+                { "id": "username", "type": "TEXT", "text": "@alisherjon","x": 80, "y": 28, "style": { "fontSize": 11, "color": "rgba(255,255,255,0.35)" } }
+              ]
+            },
+            {
+              "id": "stats-strip",
+              "type": "FRAME",
+              "name": "Stats Strip",
+              "x": 0, "y": 120, "width": 375, "height": 60,
+              "style": { "borderTop": "1px solid rgba(255,255,255,0.06)" },
+              "layout": { "type": "GRID", "columns": 3 },
+              "children": [
+                { "value": "12", "label": "Серия 🔥", "color": "#F59E0B" },
+                { "value": "870","label": "XP",       "color": "#4ADE80" },
+                { "value": "LVL 4","label": "Уровень","color": "#C4B5FD" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "settings-section",
+          "type": "GROUP", "name": "Settings",
+          "x": 16, "y": 240, "width": 343,
+          "children": [
+            { "type": "TEXT", "text": "Настройки", "style": { "fontFamily": "Syne", "fontSize": 13, "fontWeight": 700, "color": "#111318" }, "marginBottom": 10 },
+            {
+              "id": "settings-list",
+              "type": "FRAME", "style": { "borderRadius": 20, "fill": "#FFFFFF", "shadow": "0 1px 4px rgba(0,0,0,0.05)", "overflow": "hidden" },
+              "children": [
+                { "icon": "🔔", "tone": "amber",  "label": "Уведомления",  "sub": "Напоминания", "right": "toggle-on" },
+                { "icon": "🌙", "tone": "purple", "label": "Тёмная тема",  "sub": "Скоро",        "right": "toggle-off" },
+                { "icon": "💱", "tone": "green",  "label": "Валюта",       "sub": "UZS · сум",    "right": "chevron" },
+                { "icon": "🗂", "tone": "blue",   "label": "Категории",    "sub": "10 категорий", "right": "chevron" }
+              ]
+            }
+          ],
+          "animation": { "in": { "type": "stagger-fade-up", "staggerDelay": 60, "duration": 350, "delay": 200 } }
+        },
+        { "id": "navbar", "type": "COMPONENT", "ref": "NavBar", "x": 0, "y": 730, "width": 375, "height": 82, "props": { "activeTab": "profile" } }
+      ]
+    }
+  ],
+
+  "flow": [
+    {
+      "id": "t-01",
+      "from": "frame-01",
+      "to":   "frame-02",
+      "trigger": "auto",
+      "delay": 2200,
+      "transition": {
+        "type": "DISSOLVE",
+        "duration": 400,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-02",
+      "from": "frame-02",
+      "to":   "frame-03",
+      "trigger": "tap",
+      "target": "cta-button",
+      "transition": {
+        "type": "SLIDE",
+        "direction": "up",
+        "duration": 380,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-03",
+      "from": "frame-03",
+      "to":   "frame-04",
+      "trigger": "tap",
+      "target": "confirm-btn",
+      "transition": {
+        "type": "DISSOLVE",
+        "duration": 350,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-04",
+      "from": "frame-04",
+      "to":   "frame-05",
+      "trigger": "tap",
+      "target": "continue-btn",
+      "transition": {
+        "type": "PUSH",
+        "direction": "left",
+        "duration": 420,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-05",
+      "from": "frame-05",
+      "to":   "frame-06",
+      "trigger": "tap",
+      "target": "quick-actions[0]",
+      "transition": {
+        "type": "PUSH",
+        "direction": "left",
+        "duration": 380,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-06",
+      "from": "frame-06",
+      "to":   "frame-07",
+      "trigger": "tap",
+      "target": "save-btn",
+      "transition": {
+        "type": "DISSOLVE",
+        "duration": 280,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-07",
+      "from": "frame-07",
+      "to":   "frame-08",
+      "trigger": "auto",
+      "delay": 2000,
+      "transition": {
+        "type": "PUSH",
+        "direction": "left",
+        "duration": 420,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-08",
+      "from": "frame-08",
+      "to":   "frame-09",
+      "trigger": "tap",
+      "target": "navbar-rewards",
+      "transition": {
+        "type": "PUSH",
+        "direction": "left",
+        "duration": 380,
+        "easing": "easeOut"
+      }
+    },
+    {
+      "id": "t-09",
+      "from": "frame-09",
+      "to":   "frame-10",
+      "trigger": "tap",
+      "target": "navbar-profile",
+      "transition": {
+        "type": "PUSH",
+        "direction": "left",
+        "duration": 380,
+        "easing": "easeOut"
+      }
+    }
+  ],
+
+  "animationGuide": {
+    "globalRules": [
+      "All screen transitions use PUSH (left) for forward navigation, PUSH (right) for back navigation",
+      "Sheet overlays (frame-03) use SLIDE UP from y=812 to final y, SLIDE DOWN to dismiss",
+      "Toast notifications slide down from top, auto-dismiss after 1.5s with fade-up",
+      "Cards and list items stagger in with 60-80ms delay between each item",
+      "Dark gradient backgrounds use subtle orb animation (scale 1→1.15, 4s ease-in-out loop)",
+      "Fire emoji (🔥) in StreakBanner does a soft bounce every 3 seconds",
+      "Progress/XP bars always animate width from 0 to target value on entry (600-800ms easeOut)",
+      "SVG donut chart segments animate stroke-dasharray from 0 to target value, staggered 150ms per segment",
+      "Buttons scale to 0.97 on press (active state), spring back on release"
+    ],
+    "figmaPrototypingTips": [
+      "Use Smart Animate between frames for most transitions — set matching layer names",
+      "For the XP bar fill, use two variants of the bar component (empty / filled) and Smart Animate",
+      "NavBar active indicator (3px top bar) moves between positions using Smart Animate",
+      "Use Figma Variables for color tokens to support light/dark theming",
+      "For the donut chart, create each segment as a separate arc shape with an 'empty' and 'filled' variant",
+      "Confetti effect (frame-04) can be simulated with 12-16 individual emoji elements scattered, each with independent fade+move animations"
+    ]
+  }
+}
