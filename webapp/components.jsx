@@ -27,15 +27,16 @@ function PhoneFrame({ children }) {
 }
 
 /* ── STATUS BAR ───────────────────────────────────────────── */
-function StatusBar({ dark }) {
+function StatusBar({ dark, bg }) {
   const fg = dark ? 'rgba(255,255,255,0.75)' : 'var(--ink)';
+  const bgColor = bg || (dark ? '#111318' : 'var(--bg)');
   return (
     <div style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       padding: '13px 22px 5px',
       fontFamily: 'var(--font-display)',
       color: fg,
-      background: dark ? 'var(--ink-dark)' : 'var(--bg)',
+      background: bgColor,
       flexShrink: 0,
     }}>
       <span style={{ fontSize: 12, fontWeight: 700 }}>9:41</span>
@@ -209,53 +210,51 @@ function TxCard({ tx, onTap }) {
   return (
     <div onClick={() => onTap && onTap(tx)} style={{
       background: '#fff', borderRadius: 18,
-      padding: '14px 16px', marginBottom: 7,
+      padding: '14px 16px', marginBottom: 8,
       cursor: 'pointer',
-      boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <div style={{
-          width: 42, height: 42, borderRadius: 14,
-          background: isIncome ? 'var(--green-bg)' : 'var(--red-bg)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 20, flexShrink: 0,
-        }}>{tx.icon}</div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <div>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 13, fontWeight: 700, color: 'var(--ink)',
-              }}>{tx.catName}</div>
-              <div style={{
-                fontSize: 11, color: 'var(--ink-3)', fontWeight: 500,
-                marginTop: 2, display: 'flex', alignItems: 'center', gap: 5,
-              }}>
-                {tx.merchant || tx.note}
-                {tx.recurring && (
-                  <span style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 9, fontWeight: 700,
-                    color: 'var(--blue)', background: 'var(--blue-bg)',
-                    padding: '2px 6px', borderRadius: 5,
-                  }}>↻</span>
-                )}
-              </div>
-            </div>
-            <div style={{ textAlign: 'right', flexShrink: 0 }}>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 14, fontWeight: 800,
-                color: isIncome ? 'var(--green)' : 'var(--ink)',
-                fontVariantNumeric: 'tabular-nums',
-              }}>{(isIncome ? '+' : '−') + fmt(tx.amount)}</div>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 9, fontWeight: 700, color: 'var(--ink-3)',
-                letterSpacing: 0.5, marginTop: 2,
-              }}>{tx.dateLabel}</div>
-            </div>
+      {/* Top row: icon + name + amount */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between',
+        alignItems: 'center', marginBottom: 7,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            width: 42, height: 42, borderRadius: 14,
+            background: isIncome ? 'var(--green-bg)' : 'var(--red-bg)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 20, flexShrink: 0,
+          }}>{tx.cat}</div>
+          <div>
+            <div style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 13, fontWeight: 700, color: 'var(--ink)',
+            }}>{tx.catName}</div>
+            {tx.recurring && (
+              <span style={{
+                fontSize: 10, fontWeight: 700, color: 'var(--blue)',
+                background: 'var(--blue-bg)',
+                padding: '2px 7px', borderRadius: 5,
+              }}>↻ повтор</span>
+            )}
           </div>
+        </div>
+        <div style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 16, fontWeight: 800,
+          color: isIncome ? 'var(--green)' : 'var(--ink)',
+          fontVariantNumeric: 'tabular-nums',
+        }}>{(isIncome ? '+' : '−') + fmt(tx.amount)}</div>
+      </div>
+      {/* Bottom row: note + date */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{
+          fontSize: 13, color: 'var(--ink-2)',
+          maxWidth: 200, overflow: 'hidden',
+          textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+        }}>{tx.note || tx.catName}</div>
+        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--ink-3)' }}>
+          {dispDate(tx.dateStr)} · {tx.time}
         </div>
       </div>
     </div>
@@ -536,11 +535,23 @@ function today() {
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
        + '-' + String(d.getDate()).padStart(2, '0');
 }
+function nowTime() {
+  const d = new Date();
+  return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+}
+function dispDate(s) {
+  const t = today();
+  if (s === t) return 'Сегодня';
+  const y = new Date(); y.setDate(y.getDate() - 1);
+  const ys = y.getFullYear() + '-' + String(y.getMonth() + 1).padStart(2, '0') + '-' + String(y.getDate()).padStart(2, '0');
+  if (s === ys) return 'Вчера';
+  return s.slice(8) + '.' + s.slice(5, 7);
+}
 
 /* ── EXPORTS ──────────────────────────────────────────────── */
 Object.assign(window, {
   PhoneFrame, StatusBar, Logo, AppHeader, PageHeader,
   NavBar, TxCard, StreakBanner, WalletCard,
   SummaryGrid, KpiStrip, Chip, Pill, Toggle, IconChip,
-  SectionHeading, fmt, today,
+  SectionHeading, fmt, today, nowTime, dispDate,
 });
